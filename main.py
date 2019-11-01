@@ -10,6 +10,10 @@ app = Flask(__name__)
 global server
 server = os.environ.get('SERVER')
 
+if (server == None):
+    print("env variable server must be set to VPN database endpoint")
+    exit()
+
     
 def redirect_url():  
     return request.args.get('next') or request.referrer or url_for('index')  
