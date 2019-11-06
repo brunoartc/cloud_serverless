@@ -23,26 +23,30 @@ def redirect_url():
 @app.route("/todo", methods=['POST'])  
 def post_todo ():  
     global server 
-    name=request.values.get("name")  
+    title=request.values.get("title")  
     desc=request.values.get("description")  
 
-    data = {"name": name, "description": desc}
+    data = {"title": title, "description": desc}
     r = requests.post(url = server + "/todo", data = data)  
-    return jsonify({'status' : 'success', 'data' : r.json().data})    
+    return jsonify({'status' : 'success', 'data' : r.json()['data']})    
 
 @app.route("/todo", methods=['GET'])  
 def get_todo():  
     global server
 
-    r = requests.get(url = server + "/todo")  
-    return jsonify({'status' : 'success', 'data' : r.json().data}) 
+    r = requests.get(url = server + "/todo")
+    print(r.json())  
+    return jsonify({'status' : 'success', 'data' : r.json()['data']}) 
 
 @app.route("/todo", methods=['DELETE'])  
 def delete_todo():  
     global server
-    id=request.values.get("id")
-    r = requests.delete(url = (server + "/todo/" + id))  
-    return jsonify({'status' : 'success', 'data' : r.json().data}) 
+    title=request.values.get("title")
+    url = server + "/todo/" + title
+    print(url)
+    r = requests.delete(url = url)
+
+    return jsonify({'status' : 'success', 'data' : r.json()['data']}) 
     
 
 
