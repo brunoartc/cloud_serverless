@@ -8,4 +8,4 @@ sudo apt-get update -y
 sudo apt-get install python-pip -y
 sudo apt install python3-pip -y
 pip3 install -r requirments.txt
-tmux -L todo new-session -d -s myapp 'export SERVER="http://10.8.0.10";python3 main.py' 
+tmux new -d -s todo 'export SERVER="http://10.8.0.10";python3 main.py;' 
